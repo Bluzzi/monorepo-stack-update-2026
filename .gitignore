@@ -1,0 +1,36 @@
+# Idea IDE:
+**/.idea/
+
+# Package lock (except for PNPM):
+**/yarn.lock
+**/package-lock.json
+**/bun.lockb
+
+# Packages:
+**/node_modules
+
+# Environment variables and secrets files:
+**/.env*
+
+# React Email:
+**/.react-email
+
+# Builds:
+**/.next
+**/build
+**/dist
+
+# TS:
+**/*.tsbuildinfo
+
+# Playwright:
+**/test-results/
+**/playwright-report/
+**/blob-report/
+**/playwright/.cache/
+
+# Storybook
+**/storybook-static
+
+# MacOS
+**/.DS_Store

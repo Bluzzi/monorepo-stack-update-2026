@@ -1,0 +1,13 @@
+{
+  "recommendations": [
+    // Linting:
+    "dbaeumer.vscode-eslint",
+
+    // Tailwind:
+    "bradlc.vscode-tailwindcss",
+
+    // Tests:
+    "ms-playwright.playwright",
+    "vitest.explorer"
+  ]
+}

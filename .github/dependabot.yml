@@ -1,0 +1,21 @@
+version: 2
+updates:
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "monthly"
+      timezone: "Europe/Paris"
+      day: "monday"
+      time: "08:00"
+    groups:
+      all-actions:
+        patterns: ["*"]
+  - package-ecosystem: "docker"
+    directories:
+      - "/modules/frontend"
+      - "/modules/backend"
+    schedule:
+      interval: "monthly"
+      timezone: "Europe/Paris"
+      day: "monday"
+      time: "08:00"

@@ -1,0 +1,21 @@
+import type { RouteHandler } from "#/fastify/route";
+import { routeConfig } from "#/fastify/route";
+import { z } from "zod";
+
+export const config = routeConfig({
+  path: "/get_players",
+});
+
+export const input = z.object({
+  ping: z.string(),
+});
+
+export const output = z.object({
+  pong: z.string(),
+});
+
+export const handler: RouteHandler<typeof input, typeof output> = (request) => {
+  return {
+    pong: request.body.ping,
+  };
+};

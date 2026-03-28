@@ -1,0 +1,27 @@
+{
+  "scripts": {
+    // RUN FOR DEVELOPMENT:
+    "dev": "open-cli http://localhost:3000 && dotenv -- pnpm --filter=@core-module/* --recursive --parallel run dev",
+
+    // BUILD:
+    "build": "dotenv -- pnpm --filter=@core* --recursive run build",
+
+    // LINTING & FORMATTING:
+    "lint": "pnpm --filter=@core* --recursive --parallel run lint",
+    "lint:fix": "pnpm --filter=@core* --recursive --parallel run lint:fix",
+
+    "ts:check": "pnpm --filter=@core* --recursive --parallel run ts:check",
+
+    // DEPENDENCY MANAGEMENT:
+    "update": "pnpm --filter=@core* --recursive up -i -L"
+  },
+  "dependencies": {
+    "dotenv": "^17.2.3",
+    "dotenv-cli": "^11.0.0",
+    "open-cli": "^8.0.0"
+  },
+  "engines": {
+    "node": ">=24.0.0",
+    "pnpm": ">=10.0.0"
+  }
+}
