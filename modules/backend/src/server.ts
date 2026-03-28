@@ -1,7 +1,7 @@
-import { fastifyRoutes } from "./fastify/route";
 import { fastifyError } from "#/fastify/error";
 import { fastifyHooks } from "#/fastify/hook";
 import { fastifyPlugins } from "#/fastify/plugin";
+import { fastifyRoutes } from "#/fastify/route";
 import { env } from "#/utils/env";
 import { logger } from "#/utils/logger";
 import { uncaughtExceptionHandler } from "#/utils/process";

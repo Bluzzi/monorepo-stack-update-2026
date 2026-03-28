@@ -3,14 +3,14 @@ import type { z } from "zod";
 
 export type RouteMap = typeof routes[number];
 
-export type Path = RouteMap["config"]["path"];
+export type RoutePath = RouteMap["config"]["path"];
 
-export type RouteForPath<P extends Path> = Extract<RouteMap, { config: { path: P } }>;
+export type RouteForPath<P extends RoutePath> = Extract<RouteMap, { config: { path: P } }>;
 
-export type InputForPath<P extends Path> = RouteForPath<P>["input"] extends undefined
+export type InputForPath<P extends RoutePath> = RouteForPath<P>["input"] extends undefined
   ? null
   : z.infer<RouteForPath<P>["input"]>;
 
-export type OutputForPath<P extends Path> = RouteForPath<P>["output"] extends undefined
+export type OutputForPath<P extends RoutePath> = RouteForPath<P>["output"] extends undefined
   ? null
   : z.infer<RouteForPath<P>["output"]>;

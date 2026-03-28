@@ -1,5 +1,5 @@
-import type { RouteHandler } from "#/fastify/route";
-import { routeConfig } from "#/fastify/route";
+import type { RouteHandler } from "#/utils/route";
+import { routeConfig } from "#/utils/route";
 import { z } from "zod";
 
 export const config = routeConfig({

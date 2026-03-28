@@ -1,6 +1,6 @@
 import type { FastifyInstance } from "fastify";
-import { HTTPException } from "./route";
 import { logger } from "#/utils/logger";
+import { HTTPException } from "#/utils/route";
 import { styleText } from "node:util";
 
 export const fastifyHooks = (server: FastifyInstance): void => {

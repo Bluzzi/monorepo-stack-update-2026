@@ -1,5 +1,5 @@
 import type { FastifyInstance } from "fastify";
-import { HTTPException } from "./route";
+import { HTTPException } from "#/utils/route";
 
 export const fastifyError = (server: FastifyInstance): void => {
   server.setErrorHandler((error, __, reply) => {
