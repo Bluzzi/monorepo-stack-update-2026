@@ -1,0 +1,38 @@
+{
+  "name": "@core-module/frontend",
+  "type": "module",
+  "imports": {
+    "#/*": "./src/*"
+  },
+  "scripts": {
+    "build": "react-router build",
+    "dev": "react-router dev",
+    "start": "react-router-serve ./build/server/index.js",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "ts:check": "react-router typegen && tsc --noEmit"
+  },
+  "dependencies": {
+    "@core-module/backend": "workspace:*",
+    "@react-router/node": "7.13.2",
+    "@react-router/serve": "7.13.2",
+    "cookie-muncher": "^0.4.6",
+    "isbot": "^5",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "react-router": "7.13.2"
+  },
+  "devDependencies": {
+    "@bluzzi/eslint-config": "^2.2.3",
+    "@react-router/dev": "7.13.2",
+    "@tailwindcss/vite": "^4.2.2",
+    "@types/node": "^22",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "eslint": "^10.1.0",
+    "tailwindcss": "^4.2.2",
+    "typescript": "^5.9.3",
+    "vite": "^7.1.7",
+    "vite-tsconfig-paths": "^5.1.4"
+  }
+}
