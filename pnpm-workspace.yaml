@@ -3,3 +3,6 @@ color: "always"
 packages:
   - "modules/*"
   - "packages/*"
+
+allowBuilds:
+  esbuild: true

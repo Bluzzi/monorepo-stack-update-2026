@@ -3,3 +3,4 @@
 **/.next
 **/modules/**/dist
 **/build
+**/.react-router

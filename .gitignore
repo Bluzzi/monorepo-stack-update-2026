@@ -15,6 +15,9 @@
 # React Email:
 **/.react-email
 
+# React Router:
+**/.react-router/
+
 # Builds:
 **/.next
 **/build
