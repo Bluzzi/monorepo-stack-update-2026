@@ -1,32 +1,13 @@
 import type { Route } from "./+types/root";
-import type { ReactNode } from "react";
-import { asyncStorageRequest } from "#/utils/request";
-import {
-  isRouteErrorResponse,
-  Links,
-  Meta,
-  Outlet,
-  Scripts,
-  ScrollRestoration,
-} from "react-router";
+import { MutationCache, QueryCache, QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { asyncStorageRequest } from "#/utils/api.server";
+import { useState, type ReactNode } from "react";
+import { isRouteErrorResponse, Meta, Outlet, Scripts, ScrollRestoration } from "react-router";
 import "./app.css";
 
 export const middleware: Route.MiddlewareFunction[] = [
   async ({ request }, next) => {
     return asyncStorageRequest.run(request, async () => next());
-  },
-];
-
-export const links: Route.LinksFunction = () => [
-  { rel: "preconnect", href: "https://fonts.googleapis.com" },
-  {
-    rel: "preconnect",
-    href: "https://fonts.gstatic.com",
-    crossOrigin: "anonymous",
-  },
-  {
-    rel: "stylesheet",
-    href: "https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap",
   },
 ];
 
@@ -37,7 +18,6 @@ export const Layout = ({ children }: { children: ReactNode }) => {
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <Meta />
-        <Links />
       </head>
       <body>
         {children}
@@ -49,7 +29,36 @@ export const Layout = ({ children }: { children: ReactNode }) => {
 };
 
 export default function App() {
-  return <Outlet />;
+  const [queryClient] = useState(() => new QueryClient({
+    defaultOptions: {
+      queries: {
+        /**
+         * With SSR, we usually want to set some default staleTime
+         * above 0 to avoid refetching immediately on the client.
+         */
+        staleTime: 60_000,
+
+        refetchOnWindowFocus: "always",
+        refetchInterval: 30_000,
+      },
+    },
+    queryCache: new QueryCache({
+      onError: (error) => {
+        console.log("Error from Tanstack QueryClient", error);
+      },
+    }),
+    mutationCache: new MutationCache({
+      onError: (error) => {
+        console.log("Error from Tanstack QueryClient", error);
+      },
+    }),
+  }));
+
+  return (
+    <QueryClientProvider client={queryClient}>
+      <Outlet />
+    </QueryClientProvider>
+  );
 }
 
 export const ErrorBoundary = ({ error }: Route.ErrorBoundaryProps) => {

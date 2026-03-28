@@ -1,5 +1,4 @@
 import type { RouteHandler } from "#/utils/route";
-import { logger } from "#/utils/logger";
 import { routeConfig } from "#/utils/route";
 import { z } from "zod";
 
@@ -15,9 +14,7 @@ export const output = z.object({
   playerID: z.string(),
 });
 
-export const handler: RouteHandler<typeof input, typeof output> = (request) => {
-  logger.info(`${request.body.playerName} updated`);
-
+export const handler: RouteHandler<typeof input, typeof output> = (_request) => {
   return {
     playerID: "5555",
   };
