@@ -15,6 +15,7 @@ export const output = z.object({
 });
 
 export const handler: RouteHandler<typeof input, typeof output> = (request) => {
+  console.log(request.headers.authorization);
   return {
     pong: request.body.ping,
   };

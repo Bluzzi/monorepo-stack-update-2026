@@ -13,7 +13,7 @@ export const apiClient = async<P extends RoutePath>(path: P, body: InputForPath<
     method: "POST",
     headers: {
       "content-type": "application/json",
-      ...(token ? { token: token } : {}),
+      ...(token ? { authorization: token } : {}),
     },
     body: JSON.stringify(body),
   });
@@ -41,7 +41,7 @@ export const apiServer = async<P extends RoutePath>(path: P, body: InputForPath<
     method: "POST",
     headers: {
       "content-type": "application/json",
-      ...(token ? { token: token } : {}),
+      ...(token ? { authorization: token } : {}),
     },
     body: JSON.stringify(body),
   });
