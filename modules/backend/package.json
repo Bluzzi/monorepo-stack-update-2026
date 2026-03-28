@@ -10,8 +10,8 @@
     ]
   },
   "scripts": {
-    "dev": "nodemon -q -w ./src/ --exec node --import @swc-node/register/esm-register ./src/server.ts",
-    "start": "node --import @swc-node/register/esm-register ./src/server.ts",
+    "dev": "nodemon -q -w ./src/ --exec node --import @swc-node/register/esm-register ./src/service.ts",
+    "start": "node --import @swc-node/register/esm-register ./src/service.ts",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "ts:check": "tsc --noEmit"
