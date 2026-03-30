@@ -12,8 +12,8 @@ updates:
         patterns: ["*"]
   - package-ecosystem: "docker"
     directories:
-      - "/modules/frontend"
-      - "/modules/backend"
+      - "/services/frontend"
+      - "/services/backend"
     schedule:
       interval: "monthly"
       timezone: "Europe/Paris"

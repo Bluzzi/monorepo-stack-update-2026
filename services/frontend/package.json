@@ -1,5 +1,5 @@
 {
-  "name": "@core-module/frontend",
+  "name": "@core-service/frontend",
   "type": "module",
   "imports": {
     "#/*": [
@@ -19,7 +19,7 @@
     "ts:check": "react-router typegen && tsc --noEmit"
   },
   "dependencies": {
-    "@core-module/backend": "workspace:*",
+    "@core-service/backend": "workspace:*",
     "@react-router/node": "7.13.2",
     "@react-router/serve": "7.13.2",
     "@tanstack/react-query": "^5.95.2",

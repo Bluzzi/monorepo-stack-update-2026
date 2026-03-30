@@ -1,4 +1,4 @@
-import type { InputForPath, OutputForPath, RoutePath } from "@core-module/backend";
+import type { InputForPath, OutputForPath, RoutePath } from "@core-service/backend";
 import { COOKIES } from "./cookie";
 import { domCookie } from "cookie-muncher";
 

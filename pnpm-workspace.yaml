@@ -1,7 +1,7 @@
 color: "always"
 
 packages:
-  - "modules/*"
+  - "services/*"
   - "packages/*"
 
 allowBuilds:

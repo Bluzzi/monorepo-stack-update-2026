@@ -1,13 +1,7 @@
 {
   "recommendations": [
-    // Linting:
-    "dbaeumer.vscode-eslint",
-
-    // Tailwind:
-    "bradlc.vscode-tailwindcss",
-
-    // Tests:
-    "ms-playwright.playwright",
-    "vitest.explorer"
+    "dbaeumer.vscode-eslint", // Linting & formatting
+    "bradlc.vscode-tailwindcss", // Tailwind
+    "ms-playwright.playwright" // End-to-end Playwright tests
   ]
 }

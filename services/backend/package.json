@@ -1,5 +1,5 @@
 {
-  "name": "@core-module/backend",
+  "name": "@core-service/backend",
   "type": "module",
   "exports": "./src/index.ts",
   "imports": {

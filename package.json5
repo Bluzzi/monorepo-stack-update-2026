@@ -1,7 +1,7 @@
 {
   "scripts": {
     // RUN FOR DEVELOPMENT:
-    "dev": "dotenv -- pnpm --filter=@core-module/* --recursive --parallel run dev",
+    "dev": "dotenv -- pnpm --filter=@core-service/* --recursive --parallel run dev",
 
     // BUILD:
     "build": "dotenv -- pnpm --filter=@core* --recursive run build",
