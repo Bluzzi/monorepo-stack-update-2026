@@ -3,7 +3,7 @@
   "type": "module",
   "exports": "./src/index.ts",
   "imports": {
-    "#/*": [
+    "#src/*": [
       "./src/*",
       "./src/*.ts",
       "./src/*/index.ts"

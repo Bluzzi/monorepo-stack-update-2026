@@ -1,6 +1,6 @@
 import type { Route } from "./+types/root";
 import { MutationCache, QueryCache, QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { asyncStorageRequest } from "#/utils/api.server";
+import { asyncStorageRequest } from "#src/utils/api.server";
 import { useState, type ReactNode } from "react";
 import { isRouteErrorResponse, Meta, Outlet, Scripts, ScrollRestoration } from "react-router";
 import "@core-package/ui-kit/tailwind.css";

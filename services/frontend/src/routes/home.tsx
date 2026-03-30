@@ -1,7 +1,7 @@
 import type { Route } from "./+types/home";
 import { dehydrate, HydrationBoundary, QueryClient, useQuery } from "@tanstack/react-query";
-import { apiClient } from "#/utils/api.client.js";
-import { apiServer } from "#/utils/api.server.js";
+import { apiClient } from "#src/utils/api.client.js";
+import { apiServer } from "#src/utils/api.server.js";
 
 export const meta = (_: Route.MetaArgs) => {
   return [

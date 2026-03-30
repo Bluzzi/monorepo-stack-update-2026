@@ -1,6 +1,6 @@
-import type { RouteHandler } from "#/utils/route";
+import type { RouteHandler } from "#src/utils/route";
 import { database, schemas } from "@core-package/database";
-import { routeConfig } from "#/utils/route";
+import { routeConfig } from "#src/utils/route";
 import { z } from "zod";
 
 export const config = routeConfig({

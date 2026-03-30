@@ -1,7 +1,7 @@
 import type { FastifyInstance } from "fastify";
-import { routes } from "#/routes";
-import { logger } from "#/utils/logger";
-import { HTTPException, routeSchema } from "#/utils/route";
+import { routes } from "#src/routes";
+import { logger } from "#src/utils/logger";
+import { HTTPException, routeSchema } from "#src/utils/route";
 import { z } from "zod";
 
 export const fastifyRoutes = (server: FastifyInstance): void => {

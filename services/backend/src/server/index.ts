@@ -2,8 +2,8 @@ import { fastifyError } from "./error";
 import { fastifyHooks } from "./hook";
 import { fastifyPlugins } from "./plugin";
 import { fastifyRoutes } from "./route";
-import { env } from "#/utils/env";
-import { logger } from "#/utils/logger";
+import { env } from "#src/utils/env";
+import { logger } from "#src/utils/logger";
 import { fastify } from "fastify";
 
 export const startHTTPServer = async () => {

@@ -10,10 +10,10 @@
     "cssVariables": true
   },
   "aliases": {
-    "components": "#/ui",
-    "ui": "#/ui",
-    "utils": "#/utility",
-    "hooks": "#/hooks"
+    "components": "#src/ui",
+    "ui": "#src/ui",
+    "utils": "#src/utility",
+    "hooks": "#src/hooks"
   },
   "iconLibrary": "lucide",
   "menuColor": "default",

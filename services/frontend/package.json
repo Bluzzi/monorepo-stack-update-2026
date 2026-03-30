@@ -2,7 +2,7 @@
   "name": "@core-service/frontend",
   "type": "module",
   "imports": {
-    "#/*": [
+    "#src/*": [
       "./src/*",
       "./src/*.ts",
       "./src/*.tsx",

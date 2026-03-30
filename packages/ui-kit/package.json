@@ -8,10 +8,12 @@
     "./tailwind.css": "./src/styles/tailwind.css"
   },
   "imports": {
-    "#/*": [
+    "#src/*": [
       "./src/*",
       "./src/*.ts",
-      "./src/*/index.ts"
+      "./src/*.tsx",
+      "./src/*/index.ts",
+      "./src/*/index.tsx"
     ]
   },
   "scripts": {

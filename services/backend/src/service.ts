@@ -1,5 +1,5 @@
-import { startHTTPServer } from "#/server";
-import { uncaughtExceptionHandler } from "#/utils/process";
+import { startHTTPServer } from "#src/server";
+import { uncaughtExceptionHandler } from "#src/utils/process";
 
 uncaughtExceptionHandler();
 await startHTTPServer();
