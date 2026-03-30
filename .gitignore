@@ -37,3 +37,6 @@
 
 # MacOS
 **/.DS_Store
+
+# SQLite
+**/*.db

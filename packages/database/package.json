@@ -1,5 +1,5 @@
 {
-  "name": "@core-service/backend",
+  "name": "@core-package/database",
   "type": "module",
   "exports": "./src/index.ts",
   "imports": {
@@ -10,28 +10,25 @@
     ]
   },
   "scripts": {
-    "dev": "nodemon -q -w ./src/ --exec node --import @swc-node/register/esm-register ./src/service.ts",
-    "start": "node --import @swc-node/register/esm-register ./src/service.ts",
+    "db:studio": "drizzle-kit studio",
+    "db:seed": "node --import @swc-node/register/esm-register ./src/seed.ts",
+    "db:migration:create": "drizzle-kit generate",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "ts:check": "tsc"
   },
   "dependencies": {
-    "@fastify/cors": "^11.2.0",
-    "@fastify/multipart": "^9.4.0",
-    "@fastify/rate-limit": "^10.3.0",
-    "@js-temporal/polyfill": "^0.5.1",
+    "@libsql/client": "^0.17.2",
     "dotenv": "^17.3.1",
-    "fastify": "^5.8.4",
-    "winston": "^3.19.0",
-    "zod": "^4.3.6"
+    "drizzle-kit": "^0.31.10",
+    "drizzle-seed": "^0.3.1"
   },
   "devDependencies": {
     "@bluzzi/eslint-config": "^2.2.3",
     "@swc-node/register": "^1.11.1",
     "@types/node": "^25.5.0",
+    "drizzle-orm": "^0.45.2",
     "eslint": "^10.1.0",
-    "nodemon": "^3.1.14",
     "typescript": "^6.0.2"
   }
 }
