@@ -3,7 +3,6 @@
 ## To Do
 ### Required
 - [ ] TanStack Query key management (for invalidation)
-- [ ] Drizzle package setup and backend usage
 - [ ] UI-kit package with Shadcn
 - [ ] Dockerfile and CLI helper to generate packages-to-copy list
 - [ ] Playwright end-to-end tests

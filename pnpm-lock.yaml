@@ -51,6 +51,9 @@ importers:
 
   services/backend:
     dependencies:
+      '@core-package/database':
+        specifier: workspace:*
+        version: link:../../packages/database
       '@fastify/cors':
         specifier: ^11.2.0
         version: 11.2.0
