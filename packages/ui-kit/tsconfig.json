@@ -8,7 +8,7 @@
     "resolveJsonModule": true,
     "moduleDetection": "force",
     "isolatedModules": true,
-    "verbatimModuleSyntax": true,
+    // "verbatimModuleSyntax": true, // This rule is not followed by Shadcn UI
 
     // Strictness:
     "strict": true,
@@ -18,15 +18,17 @@
 
     // Path alias:
     "paths": {
-      "#src/*": ["./src/*"]
+      "#/*": ["./src/*"]
     },
 
     // Not transpiling with TypeScript (tsc):
     "module": "Preserve",
     "noEmit": true,
 
-    // Libs and types:
-    "lib": ["ES2024"],
-    "types": ["node"]
+    // Lib options:
+    "lib": ["ES2024", "dom", "dom.iterable"],
+
+    // Compilation options:
+    "jsx": "preserve"
   }
 }

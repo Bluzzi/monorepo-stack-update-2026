@@ -1,0 +1,41 @@
+{
+  "name": "@core-package/ui-kit",
+  "type": "module",
+  "exports": {
+    "./ui": "./src/ui.ts",
+    "./icons": "./src/icon.ts",
+    "./utils": "./src/utility.ts",
+    "./tailwind.css": "./src/styles/tailwind.css"
+  },
+  "imports": {
+    "#/*": [
+      "./src/*",
+      "./src/*.ts",
+      "./src/*/index.ts"
+    ]
+  },
+  "scripts": {
+    "component:add": "shadcn add",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "ts:check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "lucide-react": "^1.7.0",
+    "radix-ui": "^1.4.3",
+    "react": "19.2.4",
+    "tailwind-merge": "^3.5.0"
+  },
+  "devDependencies": {
+    "@bluzzi/eslint-config": "^2.2.3",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "eslint": "^10.1.0",
+    "shadcn": "^4.1.1",
+    "tailwindcss": "^4.2.2",
+    "tw-animate-css": "^1.4.0",
+    "typescript": "^6.0.2"
+  }
+}

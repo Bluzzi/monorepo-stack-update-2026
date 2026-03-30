@@ -19,6 +19,7 @@
     "ts:check": "react-router typegen && tsc"
   },
   "dependencies": {
+    "@core-package/ui-kit": "workspace:*",
     "@core-service/backend": "workspace:*",
     "@react-router/node": "7.13.2",
     "@react-router/serve": "7.13.2",

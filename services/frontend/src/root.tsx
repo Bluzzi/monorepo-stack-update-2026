@@ -3,7 +3,7 @@ import { MutationCache, QueryCache, QueryClient, QueryClientProvider } from "@ta
 import { asyncStorageRequest } from "#/utils/api.server";
 import { useState, type ReactNode } from "react";
 import { isRouteErrorResponse, Meta, Outlet, Scripts, ScrollRestoration } from "react-router";
-import "./app.css";
+import "@core-package/ui-kit/tailwind.css";
 
 export const middleware: Route.MiddlewareFunction[] = [
   async ({ request }, next) => {

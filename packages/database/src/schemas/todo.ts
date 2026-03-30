@@ -1,4 +1,4 @@
-import { columnsTimestamp } from "../columns/timestamp";
+import { columnsTimestamp } from "#src/columns/timestamp";
 import { text, sqliteTable } from "drizzle-orm/sqlite-core";
 
 export const todo = sqliteTable("todo", {

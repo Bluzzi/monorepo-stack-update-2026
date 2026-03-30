@@ -1,7 +1,7 @@
 import "./env-loader";
 // env variables loading priority
 import { database } from ".";
-import { todo } from "#/schemas/todo";
+import { todo } from "#src/schemas/todo";
 import { reset, seed } from "drizzle-seed";
 
 await reset(database, { todo });

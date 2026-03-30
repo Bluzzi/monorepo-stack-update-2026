@@ -1,4 +1,6 @@
 export const routes = [
-  await import("./routes/get_players"),
-  await import("./routes/update_player"),
+  // Todos:
+  await import("./routes/get_todos"),
+  await import("./routes/create_todo"),
+  await import("./routes/set_todo-as-done"),
 ] as const;
