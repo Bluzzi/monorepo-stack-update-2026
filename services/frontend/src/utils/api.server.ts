@@ -12,7 +12,7 @@ export const apiServer = async<P extends RoutePath>(path: P, body: InputForPath<
   const token = cookies.find((cookie) => cookie.name === COOKIES.TOKEN)?.value;
 
   // Execute request:
-  const response = await fetch(`http://localhost:3005${String(path)}`, {
+  const response = await fetch(`http://localhost:3005${path}`, {
     method: "POST",
     headers: {
       "content-type": "application/json",
