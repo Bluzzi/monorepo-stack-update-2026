@@ -32,6 +32,6 @@ export const routeSchema = z.object({
 
   handler: z.function({
     input: [z.custom<FastifyRequest>()],
-    output: z.union([z.looseObject({}), z.promise(z.looseObject({}))]),
+    output: z.unknown(),
   }),
 });

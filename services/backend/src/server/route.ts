@@ -24,11 +24,15 @@ export const fastifyRoutes = (server: FastifyInstance): void => {
       handler: async (request, reply) => {
         // Parse input data:
         const inputParsed = route.input.safeParse(request.body);
-        if (!inputParsed.success) throw new HTTPException("Invalid input data");
+        if (!inputParsed.success) {
+          throw new HTTPException("Invalid input data");
+        }
 
         // Handle the request:
         const outputParsed = route.output.safeParse(await route.handler(request));
-        if (!outputParsed.success) throw new HTTPException("Invalid output data");
+        if (!outputParsed.success) {
+          throw new HTTPException("Invalid output data");
+        }
 
         // Reply:
         return reply.status(200).send(outputParsed.data);

@@ -17,7 +17,7 @@ export const handler: RouteHandler<typeof input, typeof output> = async (request
   // Set todo as done in the database:
   await database.update(schemas.todo)
     .set({ deletedAt: new Date() })
-    .where(eq(schemas.todo, request.body.id));
+    .where(eq(schemas.todo.id, request.body.id));
 
   // Reply:
   return {};

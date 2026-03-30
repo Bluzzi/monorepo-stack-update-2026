@@ -44,12 +44,12 @@ export default function App() {
     },
     queryCache: new QueryCache({
       onError: (error) => {
-        console.log("Error from Tanstack QueryClient", error);
+        console.log("Error from Tanstack QueryClient (query)", error);
       },
     }),
     mutationCache: new MutationCache({
       onError: (error) => {
-        console.log("Error from Tanstack QueryClient", error);
+        console.log("Error from Tanstack QueryClient (mutation)", error);
       },
     }),
   }));
