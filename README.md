@@ -13,3 +13,4 @@
 - [ ] S3 compatible storage package
 - [ ] Redis package
 - [ ] Email package
+- [ ] Security package (argon2, jwt)
