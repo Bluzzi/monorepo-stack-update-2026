@@ -16,11 +16,6 @@
     "noImplicitOverride": true,
     "noUncheckedSideEffectImports": true,
 
-    // Path alias:
-    "paths": {
-      "#src/*": ["./src/*"]
-    },
-
     // Not transpiling with TypeScript (tsc):
     "module": "Preserve",
     "noEmit": true,
