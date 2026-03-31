@@ -146,7 +146,7 @@ const PageComponent = () => {
           </InputGroupAddon>
         </InputGroup>
 
-        <Button type="submit" className="w-full" size="lg">
+        <Button type="submit" className="w-full" size="lg" disabled={createTodo.isPending}>
           Create task
         </Button>
       </form>
@@ -163,7 +163,12 @@ const PageComponent = () => {
               )}
             </ItemContent>
             <ItemActions>
-              <Button variant="outline" size="sm" onClick={() => setTodoAsDone.mutate({ id: todo.id })}>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => setTodoAsDone.mutate({ id: todo.id })}
+                disabled={setTodoAsDone.isPending}
+              >
                 Done
               </Button>
             </ItemActions>
