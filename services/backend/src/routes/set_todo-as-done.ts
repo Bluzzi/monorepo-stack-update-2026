@@ -1,6 +1,6 @@
-import type { RouteHandler } from "#src/utils/route";
 import { database, eq, schemas } from "@core-package/database";
 import { routeConfig } from "#src/utils/route";
+import { HTTPException, type RouteHandler } from "#src/utils/route";
 import { z } from "zod";
 
 export const config = routeConfig({
@@ -24,8 +24,19 @@ export const input = z.object({
 export const output = z.object({});
 
 export const handler: RouteHandler<typeof input, typeof output> = async (request) => {
+  // Check if the todo exist in the database:
+  const [todo] = await database
+    .select()
+    .from(schemas.todo)
+    .where(eq(schemas.todo.id, request.body.id))
+    .limit(1);
+  if (!todo) {
+    throw new HTTPException("Resource does not exist");
+  }
+
   // Set todo as done in the database:
-  await database.update(schemas.todo)
+  await database
+    .update(schemas.todo)
     .set({ deletedAt: new Date() })
     .where(eq(schemas.todo.id, request.body.id));
 
