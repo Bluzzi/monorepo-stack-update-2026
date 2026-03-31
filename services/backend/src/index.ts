@@ -14,3 +14,6 @@ export type InputForPath<P extends RoutePath> = RouteForPath<P>["input"] extends
 export type OutputForPath<P extends RoutePath> = RouteForPath<P>["output"] extends undefined
   ? null
   : z.infer<RouteForPath<P>["output"]>;
+
+export type ResourcesProvidedForPath<P extends RoutePath> = RouteForPath<P>["config"]["resources"]["provides"];
+export type ResourcesInvalidatedForPath<P extends RoutePath> = RouteForPath<P>["config"]["resources"]["invalidates"];
