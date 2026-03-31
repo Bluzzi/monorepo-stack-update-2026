@@ -3,6 +3,7 @@
 ## To Do
 ### Required
 - [ ] Dockerfile and CLI helper to generate packages-to-copy list
+  - https://gist.github.com/h-campos/9547d3b3cfba181949ba8b3cc577f11e
 - [ ] Playwright end-to-end tests
 - [ ] `.vscode` folder review, extensions settings and code snippets
 - [ ] README with explanation of the choices and comparison with the old stack
