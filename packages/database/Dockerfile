@@ -18,4 +18,4 @@ ENV NODE_ENV="production"
 
 # Run the server:
 WORKDIR /app/packages/database
-CMD pnpm run reset && pnpm run seed
+CMD pnpm run seed
