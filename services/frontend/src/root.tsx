@@ -1,4 +1,5 @@
 import type { Route } from "./+types/root";
+import { Toaster } from "@core-package/ui-kit/ui";
 import { MutationCache, QueryCache, QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { asyncStorageRequest } from "#src/utils/api.server";
 import { useState, type ReactNode } from "react";
@@ -19,7 +20,10 @@ export const Layout = ({ children }: { children: ReactNode }) => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <Meta />
       </head>
-      <body>
+      <body
+        // https://stackoverflow.com/questions/75337953/what-causes-nextjs-warning-extra-attributes-from-the-server-data-new-gr-c-s-c
+        suppressHydrationWarning={true}
+      >
         {children}
         <ScrollRestoration />
         <Scripts />
@@ -78,6 +82,8 @@ export default function App() {
 
   return (
     <QueryClientProvider client={queryClient}>
+      <Toaster />
+
       <Outlet />
     </QueryClientProvider>
   );

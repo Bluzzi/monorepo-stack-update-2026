@@ -12,11 +12,13 @@ import {
   ItemContent,
   ItemDescription,
   ItemTitle,
+  toast,
 } from "@core-package/ui-kit/ui";
+import { useForm } from "@tanstack/react-form";
 import { dehydrate, HydrationBoundary, QueryClient, useMutation, useQuery } from "@tanstack/react-query";
 import { apiClient } from "#src/utils/api.client.js";
 import { apiServer } from "#src/utils/api.server.js";
-import { useState } from "react";
+import { z } from "zod";
 
 export const meta = (_: Route.MetaArgs) => {
   return [
@@ -37,10 +39,6 @@ export const loader = async (_: Route.LoaderArgs) => {
 };
 
 const PageComponent = () => {
-  // States:
-  const [title, setTitle] = useState<string>("");
-  const [description, setDescription] = useState<string>("");
-
   // Queries:
   const { data } = useQuery({
     queryKey: ["todo"] satisfies BackendResourcesProvidedForPath<"/get_todos">,
@@ -50,57 +48,108 @@ const PageComponent = () => {
   // Mutations:
   const createTodo = useMutation({
     mutationKey: ["todo"] satisfies BackendResourcesInvalidatedForPath<"/create_todo">,
-    mutationFn: async () => apiClient("/create_todo", {
-      title: title,
-      description: description || null,
-    }),
-    onSuccess: () => {
-      setTitle("");
-      setDescription("");
+    mutationFn: async (data: { title: string; description: string }) => {
+      return apiClient("/create_todo", {
+        title: data.title,
+        description: data.description || null,
+      });
     },
     onError: () => {
-      alert("Error");
+      toast.error("Something went wrong while creating the task. Please try again.");
     },
   });
 
   const setTodoAsDone = useMutation({
     mutationKey: ["todo"] satisfies BackendResourcesInvalidatedForPath<"/set_todo-as-done">,
-    mutationFn: async (id: string) => apiClient("/set_todo-as-done", { id: id }),
+    mutationFn: async (data: { id: string }) => {
+      return apiClient("/set_todo-as-done", { id: data.id });
+    },
     onError: () => {
-      alert("Error");
+      toast.error("Something went wrong while creating the task. Please try again.");
+    },
+  });
+
+  // Form:
+  const form = useForm({
+    defaultValues: {
+      title: "",
+      description: "",
+    },
+    validators: {
+      onSubmit: z.object({
+        title: z.string().min(3, { error: "The title must be at least 3 characters long." }),
+        description: z.string().max(280, { error: "The description must be no longer than 280 characters." }),
+      }),
+    },
+    onSubmit: ({ value }) => {
+      createTodo.mutate(value);
+      form.reset();
     },
   });
 
   // Render:
   return (
     <main className="flex flex-col items-center gap-4 justify-center py-10">
-      <div className="w-xl space-y-4">
-        <Input
-          placeholder="Title of the todo"
-          value={title}
-          onChange={(event) => setTitle(event.target.value)}
+      <form
+        onSubmit={async (event) => {
+          event.preventDefault();
+          event.stopPropagation();
+          await form.handleSubmit();
+        }}
+        className="w-xl space-y-4"
+      >
+        <form.Field
+          name="title"
+          children={(field) => (
+            <div className="space-y-1">
+              <Input
+                placeholder="Title of the task"
+                value={field.state.value}
+                onChange={(event) => field.handleChange(event.target.value)}
+                onBlur={field.handleBlur}
+              />
+
+              {!field.state.meta.isValid && (
+                <p className="text-red-500 text-sm">{field.state.meta.errors[0]?.message}</p>
+              )}
+            </div>
+          )}
         />
 
         <InputGroup>
-          <InputGroupTextarea
-            placeholder="Write a description..."
-            value={description}
-            onChange={(event) => setDescription(event.target.value)}
+          <form.Field
+            name="description"
+            children={((field) => (
+              <>
+                <InputGroupTextarea
+                  placeholder="Add more details about the task (optional)"
+                  value={field.state.value}
+                  onChange={(event) => field.handleChange(event.target.value)}
+                  onBlur={field.handleBlur}
+                  className="min-h-8"
+                />
+
+                {!field.state.meta.isValid && (
+                  <p className="text-red-500 text-sm">{field.state.meta.errors[0]?.message}</p>
+                )}
+              </>
+            ))}
           />
           <InputGroupAddon align="block-end">
-            <InputGroupText className="ml-auto">0/280</InputGroupText>
+            <InputGroupText className="ml-auto">
+              <form.Subscribe
+                selector={(state) => state.values.description}
+                children={(description) => description.length}
+              />
+              /280
+            </InputGroupText>
           </InputGroupAddon>
         </InputGroup>
 
-        <Button
-          className="w-full"
-          size="lg"
-          disabled={title.length === 0}
-          onClick={() => createTodo.mutate()}
-        >
-          Create Todo
+        <Button type="submit" className="w-full" size="lg">
+          Create task
         </Button>
-      </div>
+      </form>
 
       <div className="w-xl space-y-4">
         {data?.todos.map((todo) => (
@@ -114,7 +163,7 @@ const PageComponent = () => {
               )}
             </ItemContent>
             <ItemActions>
-              <Button variant="outline" size="sm" onClick={() => setTodoAsDone.mutate(todo.id)}>
+              <Button variant="outline" size="sm" onClick={() => setTodoAsDone.mutate({ id: todo.id })}>
                 Done
               </Button>
             </ItemActions>
