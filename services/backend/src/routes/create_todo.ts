@@ -5,6 +5,11 @@ import { z } from "zod";
 
 export const config = routeConfig({
   path: "/create_todo",
+
+  resources: {
+    invalidates: ["todo"],
+    provides: ["todo"],
+  },
 });
 
 export const input = z.object({
@@ -14,6 +19,8 @@ export const input = z.object({
 
 export const output = z.object({
   id: z.string(),
+  title: z.string(),
+  description: z.string().nullable(),
 });
 
 export const handler: RouteHandler<typeof input, typeof output> = async (request) => {
@@ -25,6 +32,6 @@ export const handler: RouteHandler<typeof input, typeof output> = async (request
 
   // Reply:
   return {
-    id: newTodo.id,
+    ...newTodo,
   };
 };

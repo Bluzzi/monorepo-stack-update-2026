@@ -19,9 +19,16 @@ export class HTTPException extends Error {
 }
 
 // Route schema:
+const resource = z.enum(["todo"]); // defines all resources (ensures type safety and autocomplete)
+
 export const routeSchema = z.object({
   config: z.object({
     path: z.string(), // path of the route
+
+    resources: z.object({ // declares which data resources this route provides or invalidates (used for frontend caching)
+      invalidates: z.array(resource), // resources updated, created, or deleted by the route
+      provides: z.array(resource), // resources returned by the route
+    }),
 
     rateLimit: z.number().positive().optional(), // max request per 1 minute
     fileMaxSize: z.number().optional(), // max multipart file size in bytes

@@ -5,6 +5,11 @@ import { z } from "zod";
 
 export const config = routeConfig({
   path: "/get_todos",
+
+  resources: {
+    invalidates: [],
+    provides: ["todo"],
+  },
 });
 
 export const input = z.object({});

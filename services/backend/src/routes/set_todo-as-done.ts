@@ -5,7 +5,17 @@ import { z } from "zod";
 
 export const config = routeConfig({
   path: "/set_todo-as-done",
+
+  resources: {
+    invalidates: ["todo"],
+    provides: [],
+  },
 });
+
+export const resources = {
+  provides: [],
+  invalidates: ["todo"],
+} as const;
 
 export const input = z.object({
   id: z.string(),
