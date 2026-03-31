@@ -2,8 +2,6 @@
 
 ## To Do
 ### Required
-- [ ] TanStack Query key management (for invalidation)
-- [ ] UI-kit package with Shadcn
 - [ ] Dockerfile and CLI helper to generate packages-to-copy list
 - [ ] Playwright end-to-end tests
 - [ ] `.vscode` folder review, extensions settings and code snippets
