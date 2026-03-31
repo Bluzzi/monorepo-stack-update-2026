@@ -32,10 +32,10 @@ export default function App() {
   const [queryClient] = useState(() => new QueryClient({
     defaultOptions: {
       queries: {
-        /**
-         * With SSR, we usually want to set some default staleTime
-         * above 0 to avoid refetching immediately on the client.
-         */
+      /**
+       * With SSR, we usually want to set some default staleTime
+       * above 0 to avoid refetching immediately on the client.
+       */
         staleTime: 60_000,
 
         refetchOnWindowFocus: "always",
@@ -48,6 +48,28 @@ export default function App() {
       },
     }),
     mutationCache: new MutationCache({
+      onSuccess: async (_data, _variables, _context, mutation) => {
+        /**
+         * Mutation keys are used as resource-based invalidation tokens for queries.
+         *
+         * This differs from TanStack Query's default invalidation model, where
+         * `invalidateQueries({ queryKey: ["todos"] })` matches queries by hierarchical
+         * prefix — i.e. any query whose key starts with ["todos"], respecting order
+         * and position.
+         * @see {@link https://tanstack.com/query/v5/docs/framework/react/guides/query-invalidation}
+         *
+         * Here, we treat each element of the mutation key as an independent token:
+         * a query is invalidated if *any* of its key elements (at any position) matches
+         * *any* element of the mutation key. There is no hierarchy or ordering — each
+         * string token is a flat, unordered resource identifier.
+        */
+        const mutationKey = mutation.options.mutationKey ?? [];
+        await queryClient.invalidateQueries({
+          predicate: (query) => query.queryKey.some(
+            (key) => typeof key === "string" && mutationKey.includes(key),
+          ),
+        });
+      },
       onError: (error) => {
         console.log("Error from Tanstack QueryClient (mutation)", error);
       },

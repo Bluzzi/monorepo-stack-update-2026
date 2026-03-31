@@ -1,4 +1,5 @@
 import type { Route } from "./+types/home";
+import type { BackendResourcesProvidedForPath, BackendResourcesInvalidatedForPath } from "@core-service/backend";
 import {
   Button,
   Input,
@@ -12,7 +13,7 @@ import {
   ItemDescription,
   ItemTitle,
 } from "@core-package/ui-kit/ui";
-import { dehydrate, HydrationBoundary, QueryClient, useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { dehydrate, HydrationBoundary, QueryClient, useMutation, useQuery } from "@tanstack/react-query";
 import { apiClient } from "#src/utils/api.client.js";
 import { apiServer } from "#src/utils/api.server.js";
 import { useState } from "react";
@@ -28,7 +29,7 @@ export const loader = async (_: Route.LoaderArgs) => {
   const queryClient = new QueryClient();
 
   await queryClient.prefetchQuery({
-    queryKey: ["players"],
+    queryKey: ["todo"] satisfies BackendResourcesProvidedForPath<"/get_todos">,
     queryFn: async () => apiServer("/get_todos", {}),
   });
 
@@ -36,21 +37,26 @@ export const loader = async (_: Route.LoaderArgs) => {
 };
 
 const PageComponent = () => {
-  const queryClient = useQueryClient();
-
+  // States:
   const [title, setTitle] = useState<string>("");
   const [description, setDescription] = useState<string>("");
 
+  // Queries:
+  const { data } = useQuery({
+    queryKey: ["todo"] satisfies BackendResourcesProvidedForPath<"/get_todos">,
+    queryFn: async () => apiClient("/get_todos", {}),
+  });
+
+  // Mutations:
   const createTodo = useMutation({
+    mutationKey: ["todo"] satisfies BackendResourcesInvalidatedForPath<"/create_todo">,
     mutationFn: async () => apiClient("/create_todo", {
       title: title,
       description: description || null,
     }),
-    onSuccess: async () => {
+    onSuccess: () => {
       setTitle("");
       setDescription("");
-
-      await queryClient.invalidateQueries({ queryKey: ["todos"] });
     },
     onError: () => {
       alert("Error");
@@ -58,20 +64,14 @@ const PageComponent = () => {
   });
 
   const setTodoAsDone = useMutation({
+    mutationKey: ["todo"] satisfies BackendResourcesInvalidatedForPath<"/set_todo-as-done">,
     mutationFn: async (id: string) => apiClient("/set_todo-as-done", { id: id }),
-    onSuccess: async () => {
-      await queryClient.invalidateQueries({ queryKey: ["todos"] });
-    },
     onError: () => {
       alert("Error");
     },
   });
 
-  const { data } = useQuery({
-    queryKey: ["todos"],
-    queryFn: async () => apiClient("/get_todos", {}),
-  });
-
+  // Render:
   return (
     <main className="flex flex-col items-center gap-4 justify-center py-10">
       <div className="w-xl space-y-4">
