@@ -1,19 +1,19 @@
 import type { routes } from "./routes";
 import type { z } from "zod";
 
-export type RouteMap = typeof routes[number];
+export type BackendRouteMap = typeof routes[number];
 
-export type RoutePath = RouteMap["config"]["path"];
+export type BackendPath = BackendRouteMap["config"]["path"];
 
-export type RouteForPath<P extends RoutePath> = Extract<RouteMap, { config: { path: P } }>;
+export type BackendRouteForPath<P extends BackendPath> = Extract<BackendRouteMap, { config: { path: P } }>;
 
-export type InputForPath<P extends RoutePath> = RouteForPath<P>["input"] extends undefined
+export type BackendInputForPath<P extends BackendPath> = BackendRouteForPath<P>["input"] extends undefined
   ? null
-  : z.infer<RouteForPath<P>["input"]>;
+  : z.infer<BackendRouteForPath<P>["input"]>;
 
-export type OutputForPath<P extends RoutePath> = RouteForPath<P>["output"] extends undefined
+export type BackendOutputForPath<P extends BackendPath> = BackendRouteForPath<P>["output"] extends undefined
   ? null
-  : z.infer<RouteForPath<P>["output"]>;
+  : z.infer<BackendRouteForPath<P>["output"]>;
 
-export type ResourcesProvidedForPath<P extends RoutePath> = RouteForPath<P>["config"]["resources"]["provides"];
-export type ResourcesInvalidatedForPath<P extends RoutePath> = RouteForPath<P>["config"]["resources"]["invalidates"];
+export type BackendResourcesProvidedForPath<P extends BackendPath> = BackendRouteForPath<P>["config"]["resources"]["provides"];
+export type BackendResourcesInvalidatedForPath<P extends BackendPath> = BackendRouteForPath<P>["config"]["resources"]["invalidates"];

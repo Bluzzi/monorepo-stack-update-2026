@@ -1,11 +1,11 @@
-import type { InputForPath, OutputForPath, RoutePath } from "@core-service/backend";
+import type { BackendInputForPath, BackendOutputForPath, BackendPath } from "@core-service/backend";
 import { COOKIES } from "./cookie";
 import { httpCookie } from "cookie-muncher";
 import { AsyncLocalStorage } from "node:async_hooks";
 
 export const asyncStorageRequest = new AsyncLocalStorage<Request>();
 
-export const apiServer = async<P extends RoutePath>(path: P, body: InputForPath<P>): Promise<OutputForPath<P>> => {
+export const apiServer = async<P extends BackendPath>(path: P, body: BackendInputForPath<P>): Promise<BackendOutputForPath<P>> => {
   // Get the token if it found:
   const request = asyncStorageRequest.getStore();
   const cookies = httpCookie.parse(request?.headers.get("Cookie") ?? "");
@@ -30,5 +30,5 @@ export const apiServer = async<P extends RoutePath>(path: P, body: InputForPath<
   }
 
   // Return json output:
-  return await response.json() as OutputForPath<P>;
+  return await response.json() as BackendOutputForPath<P>;
 };
