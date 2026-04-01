@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    // Base options:
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "target": "ES2024",
+    "allowJs": true,
+    "resolveJsonModule": true,
+    "moduleDetection": "force",
+    "isolatedModules": true,
+    "verbatimModuleSyntax": true,
+
+    // Strictness:
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitOverride": true,
+    "noUncheckedSideEffectImports": true,
+
+    // Not transpiling with TypeScript (tsc):
+    "module": "Preserve",
+    "noEmit": true,
+
+    // Libs and types:
+    "lib": ["ES2024"],
+    "types": ["node"]
+  }
+}

@@ -8,6 +8,13 @@ RUN corepack enable
 COPY ./package.json5 ./pnpm-lock.yaml ./pnpm-workspace.yaml ./
 COPY ./modules/backend/package.json ./modules/backend/
 
+###########################
+# GENERATED COPY COMMANDS #
+###########################
+COPY ./packages/database/ ./packages/database/
+COPY ./services/backend/  ./services/backend/
+###########################
+
 RUN pnpm install --frozen-lockfile
 
 # Copy all folders and files:

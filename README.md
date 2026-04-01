@@ -11,6 +11,7 @@
 - [ ] Environment variables documentation in README
 - [ ] Port listing in README
 - [ ] Add a unique identifier for each queries
+- [ ] Optimize Dockerfiles and include dependancies
 ### Not sure
 - [ ] S3 compatible storage package
 - [ ] Redis package

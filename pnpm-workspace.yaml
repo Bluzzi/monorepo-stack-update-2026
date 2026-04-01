@@ -3,6 +3,7 @@ color: "always"
 packages:
   - "services/*"
   - "packages/*"
+  - "internals/*"
 
 allowBuilds:
   "@swc/core": true
