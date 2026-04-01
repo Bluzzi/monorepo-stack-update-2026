@@ -1,6 +1,10 @@
 import type { Route } from "./+types/home";
 import type { BackendResourcesProvidedForPath, BackendResourcesInvalidatedForPath } from "@core-service/backend";
+import { AlertCircleIcon } from "@core-package/ui-kit/icons";
 import {
+  Alert,
+  AlertDescription,
+  AlertTitle,
   Button,
   Input,
   InputGroup,
@@ -12,12 +16,15 @@ import {
   ItemContent,
   ItemDescription,
   ItemTitle,
+  Skeleton,
   toast,
 } from "@core-package/ui-kit/ui";
+import { render } from "@core-package/ui-kit/utils";
 import { useForm } from "@tanstack/react-form";
 import { dehydrate, HydrationBoundary, QueryClient, useMutation, useQuery } from "@tanstack/react-query";
 import { apiClient } from "#src/utils/api.client.js";
 import { apiServer } from "#src/utils/api.server.js";
+import { useRef } from "react";
 import { z } from "zod";
 
 export const meta = (_: Route.MetaArgs) => {
@@ -39,8 +46,11 @@ export const loader = async (_: Route.LoaderArgs) => {
 };
 
 const PageComponent = () => {
+  // Refs:
+  const titleRef = useRef<HTMLInputElement>(null);
+
   // Queries:
-  const { data } = useQuery({
+  const { data, status } = useQuery({
     queryKey: ["todo"] satisfies BackendResourcesProvidedForPath<"/get_todos">,
     queryFn: async () => apiClient("/get_todos", {}),
   });
@@ -84,6 +94,7 @@ const PageComponent = () => {
     onSubmit: ({ value }) => {
       createTodo.mutate(value);
       form.reset();
+      titleRef.current?.focus();
     },
   });
 
@@ -107,6 +118,7 @@ const PageComponent = () => {
                 value={field.state.value}
                 onChange={(event) => field.handleChange(event.target.value)}
                 onBlur={field.handleBlur}
+                ref={titleRef}
               />
 
               {!field.state.meta.isValid && (
@@ -151,30 +163,52 @@ const PageComponent = () => {
         </Button>
       </form>
 
-      <div className="w-xl space-y-4">
-        {data?.todos.map((todo) => (
-          <Item key={todo.id} variant="outline">
-            <ItemContent>
-              <ItemTitle>{todo.title}</ItemTitle>
-              {todo.description && (
-                <ItemDescription>
-                  {todo.description}
-                </ItemDescription>
-              )}
-            </ItemContent>
-            <ItemActions>
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => setTodoAsDone.mutate({ id: todo.id })}
-                disabled={setTodoAsDone.isPending}
-              >
-                Done
-              </Button>
-            </ItemActions>
-          </Item>
-        ))}
-      </div>
+      {render(() => {
+        if (status === "error") return (
+          <Alert variant="destructive" className="w-full max-w-xl">
+            <AlertCircleIcon />
+            <AlertTitle>Loading error</AlertTitle>
+            <AlertDescription>
+              An error occurred while loading the data. Please try again.
+            </AlertDescription>
+          </Alert>
+        );
+
+        if (status === "pending") return (
+          <div className="space-y-4 w-full max-w-xl ">
+            <Skeleton className="h-14" />
+            <Skeleton className="h-14" />
+            <Skeleton className="h-14" />
+          </div>
+        );
+
+        return (
+          <div className="w-full max-w-xl space-y-4">
+            {data.todos.map((todo) => (
+              <Item key={todo.id} variant="outline">
+                <ItemContent>
+                  <ItemTitle>{todo.title}</ItemTitle>
+                  {todo.description && (
+                    <ItemDescription>
+                      {todo.description}
+                    </ItemDescription>
+                  )}
+                </ItemContent>
+                <ItemActions>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => setTodoAsDone.mutate({ id: todo.id })}
+                    disabled={setTodoAsDone.isPending}
+                  >
+                    Done
+                  </Button>
+                </ItemActions>
+              </Item>
+            ))}
+          </div>
+        );
+      })}
     </main>
   );
 };

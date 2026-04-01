@@ -1,2 +1,2 @@
 export * from "./utils/style";
-export type * from "./utils/react";
+export * from "./utils/react";

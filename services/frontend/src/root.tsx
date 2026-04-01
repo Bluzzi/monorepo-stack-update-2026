@@ -1,6 +1,7 @@
 import type { Route } from "./+types/root";
 import { Toaster } from "@core-package/ui-kit/ui";
 import { MutationCache, QueryCache, QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { asyncStorageRequest } from "#src/utils/api.server";
 import { useState, type ReactNode } from "react";
 import { isRouteErrorResponse, Meta, Outlet, Scripts, ScrollRestoration } from "react-router";
@@ -82,6 +83,7 @@ export default function App() {
 
   return (
     <QueryClientProvider client={queryClient}>
+      <ReactQueryDevtools initialIsOpen={false} />
       <Toaster />
 
       <Outlet />

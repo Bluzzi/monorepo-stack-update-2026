@@ -12,11 +12,6 @@ export const config = routeConfig({
   },
 });
 
-export const resources = {
-  provides: [],
-  invalidates: ["todo"],
-} as const;
-
 export const input = z.object({
   id: z.string(),
 });

@@ -10,6 +10,7 @@
 - [ ] Frontend env variables
 - [ ] Environment variables documentation in README
 - [ ] Port listing in README
+- [ ] Add a unique identifier for each queries
 ### Not sure
 - [ ] S3 compatible storage package
 - [ ] Redis package

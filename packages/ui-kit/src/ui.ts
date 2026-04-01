@@ -1,6 +1,6 @@
 // export * from "./ui/accordion";
 // export * from "./ui/alert-dialog";
-// export * from "./ui/alert";
+export * from "./ui/alert";
 // export * from "./ui/aspect-ratio";
 // export * from "./ui/avatar";
 // export * from "./ui/badge";
@@ -43,7 +43,7 @@ export * from "./ui/separator";
 // export * from "./ui/sheet";
 // export * from "./ui/sidebar-desktop-only";
 // export * from "./ui/sidebar";
-// export * from "./ui/skeleton";
+export * from "./ui/skeleton";
 // export * from "./ui/slider";
 export * from "./ui/sonner";
 export * from "./ui/spinner";
