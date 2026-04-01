@@ -1,8 +1,8 @@
 import { columnsTimestamp } from "#src/columns/timestamp";
-import { text, sqliteTable } from "drizzle-orm/sqlite-core";
+import { pgTable, text, uuid } from "drizzle-orm/pg-core";
 
-export const todo = sqliteTable("todo", {
-  id: text("id").primaryKey().$defaultFn(() => crypto.randomUUID()),
+export const todo = pgTable("todo", {
+  id: uuid("id").primaryKey().defaultRandom(),
 
   title: text("title").notNull(),
   description: text("description"),

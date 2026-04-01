@@ -21,12 +21,14 @@
     "@libsql/client": "^0.17.2",
     "dotenv": "^17.3.1",
     "drizzle-kit": "^0.31.10",
-    "drizzle-seed": "^0.3.1"
+    "drizzle-seed": "^0.3.1",
+    "pg": "^8.20.0"
   },
   "devDependencies": {
     "@bluzzi/eslint-config": "^2.2.3",
     "@swc-node/register": "^1.11.1",
     "@types/node": "^25.5.0",
+    "@types/pg": "^8.20.0",
     "drizzle-orm": "^0.45.2",
     "eslint": "^10.1.0",
     "typescript": "^6.0.2"
