@@ -1,5 +1,5 @@
 {
-  "name": "@core-internal/cli",
+  "name": "@core-internal/scripts",
   "type": "module",
   "imports": {
     "#src/*": [
