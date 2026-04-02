@@ -15,6 +15,7 @@ import {
   ItemActions,
   ItemContent,
   ItemDescription,
+  ItemGroup,
   ItemTitle,
   Skeleton,
   toast,
@@ -183,9 +184,9 @@ const PageComponent = () => {
         );
 
         return (
-          <div className="w-full max-w-xl space-y-4">
+          <ItemGroup role="list" className="w-full max-w-xl space-y-4">
             {data.todos.map((todo) => (
-              <Item key={todo.id} variant="outline">
+              <Item key={todo.id} role="listitem" variant="outline">
                 <ItemContent>
                   <ItemTitle>{todo.title}</ItemTitle>
                   {todo.description && (
@@ -206,7 +207,7 @@ const PageComponent = () => {
                 </ItemActions>
               </Item>
             ))}
-          </div>
+          </ItemGroup>
         );
       })}
     </main>

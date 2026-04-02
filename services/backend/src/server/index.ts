@@ -14,6 +14,8 @@ export const startHTTPServer = async () => {
   fastifyHooks(server);
   fastifyRoutes(server);
 
+  server.get("/ping", () => ({ ping: "pong" }));
+
   await server.listen({ host: "0.0.0.0", port: env.PORT });
   logger.info(`The server has been successfully started at http://localhost:${String(env.PORT)}`);
 };

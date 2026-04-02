@@ -1,0 +1,33 @@
+{
+  "name": "@core-internal/e2e-tests",
+  "type": "module",
+  "imports": {
+    "#src/*": [
+      "./src/*",
+      "./src/*.ts",
+      "./src/*/index.ts"
+    ]
+  },
+  "scripts": {
+    "pw:setup": "npx playwright install --with-deps chromium",
+    "pw:test": "playwright test",
+    "pw:show-report": "playwright show-report",
+    "pw:merge-reports": "playwright merge-reports",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "ts:check": "tsc"
+  },
+  "dependencies": {
+    "@core-package/database": "workspace:*",
+    "@playwright/test": "^1.59.1",
+    "dotenv": "^17.3.1",
+    "zod": "^4.3.6"
+  },
+  "devDependencies": {
+    "@bluzzi/eslint-config": "^2.2.3",
+    "@swc-node/register": "^1.11.1",
+    "@types/node": "^25.5.0",
+    "eslint": "^10.1.0",
+    "typescript": "^6.0.2"
+  }
+}
