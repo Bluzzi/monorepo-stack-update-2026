@@ -4,7 +4,7 @@ import { MutationCache, QueryCache, QueryClient, QueryClientProvider } from "@ta
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { asyncStorageRequest } from "#src/utils/api.server";
 import { useState, type ReactNode } from "react";
-import { isRouteErrorResponse, Meta, Outlet, Scripts, ScrollRestoration } from "react-router";
+import { isRouteErrorResponse, Links, Meta, Outlet, Scripts, ScrollRestoration } from "react-router";
 import "@core-package/ui-kit/tailwind.css";
 
 export const middleware: Route.MiddlewareFunction[] = [
@@ -20,6 +20,7 @@ export const Layout = ({ children }: { children: ReactNode }) => {
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <Meta />
+        <Links />
       </head>
       <body
         // https://stackoverflow.com/questions/75337953/what-causes-nextjs-warning-extra-attributes-from-the-server-data-new-gr-c-s-c
