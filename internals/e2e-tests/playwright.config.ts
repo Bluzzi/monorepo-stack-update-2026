@@ -17,7 +17,7 @@ export default defineConfig({
 
   reporter: [
     ["list", { printSteps: true }],
-    process.env.CI ? ["blob"] : ["html", { open: "always" }],
+    ["html", { open: "always" }],
   ],
 
   use: {
