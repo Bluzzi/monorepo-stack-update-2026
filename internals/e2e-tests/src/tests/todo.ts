@@ -27,4 +27,5 @@ test("set a todo as done", async ({ page }) => {
 
   // Set the todo as done:
   await page.getByRole("listitem").filter({ hasText: todoTitle }).getByRole("button", { name: "Done" }).click();
+  await expect(page.getByRole("listitem").filter({ hasText: todoTitle })).not.toBeVisible();
 });
