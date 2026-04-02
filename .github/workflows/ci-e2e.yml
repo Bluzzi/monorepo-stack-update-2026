@@ -1,4 +1,4 @@
-name: CI
+name: CI (E2E)
 
 on:
   push:
@@ -28,19 +28,19 @@ jobs:
           --health-retries=5
     steps:
       - uses: actions/checkout@v6
-      - uses: pnpm/action-setup@v4
+      - uses: pnpm/action-setup@v5
         with:
           version: latest
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v6
         with:
           node-version: lts/*
           cache: pnpm
       - run: pnpm install --frozen-lockfile
       - run: pnpm --filter=@core-internal/e2e-tests run pw:setup
       - run: pnpm --filter=@core-internal/e2e-tests run pw:test
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         if: ${{ !cancelled() }}
         with:
           name: blob-report
-          path: internals/e2e/blob-report
+          path: internals/e2e-tests/blob-report
           retention-days: 5
