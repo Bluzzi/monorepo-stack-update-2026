@@ -28,14 +28,14 @@ export default defineConfig({
 
   webServer: [
     {
-      command: "pnpm --filter=@core-services/frontend run start",
+      command: "pnpm --filter=@core-service/frontend run dev",
       url: new URL("/ping", "http://localhost:5173").toString(),
       reuseExistingServer: !process.env.CI,
       stdout: "pipe",
       stderr: "pipe",
     },
     {
-      command: "pnpm --filter=@core-services/backend run start",
+      command: "pnpm --filter=@core-service/backend run dev",
       url: new URL("/ping", "http://localhost:3005").toString(),
       reuseExistingServer: !process.env.CI,
       stdout: "pipe",
