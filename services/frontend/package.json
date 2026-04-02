@@ -15,7 +15,7 @@
     "dev": "react-router dev",
     "start": "react-router-serve ./build/server/index.js",
     "lint": "eslint .",
-    "lint:fix": "eslint . --fix",
+    "lint:fix": "react-router typegen && eslint . --fix",
     "ts:check": "react-router typegen && tsc"
   },
   "dependencies": {
