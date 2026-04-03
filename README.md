@@ -16,5 +16,6 @@
 - [ ] Email package
 - [ ] Security package (argon2, jwt)
 - [ ] AI instructions
+- [ ] Dialog provider update
 
 https://github.com/nodejs/node/pull/60864
